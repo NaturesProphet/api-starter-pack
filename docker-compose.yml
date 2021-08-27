@@ -1,0 +1,29 @@
+version: '3'
+services:
+  sql:
+    image: postgres:alpine
+    container_name: garcia-postgre
+    ports: 
+      - 5432:5432
+    volumes:
+      - ./DOCKER-VOLUMES/postgresql/postgre-data:/var/lib/postgresql
+      - ./DOCKER-VOLUMES/postgresql/postgre-data/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=chapolin
+      - POSTGRES_PASSWORD=colorado123
+      - POSTGRES_DB=garcia
+      - TZ=America/SaoPaulo
+
+  # rabbitmq:
+  #   container_name: rabbitmq-server
+  #   image: rabbitmq:3.8-management
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   volumes:
+  #     - ./DOCKER-VOLUMES/rabbitmq:/var/lib/rabbitmq
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=garcia
+  #     - RABBITMQ_DEFAULT_PASS=garcia
+  #   depends_on:
+  #     - sql
