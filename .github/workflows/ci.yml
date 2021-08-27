@@ -32,7 +32,7 @@ jobs:
       - run: npm run build
 
   Build:
-    needs: [Compile, Tests]
+    needs: [Compile]
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
