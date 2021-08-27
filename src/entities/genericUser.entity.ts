@@ -1,6 +1,6 @@
 import { Column, Index, BeforeInsert } from "typeorm";
 import * as bcrypt from 'bcryptjs';
-import { GenericEntity } from "./generic.entitie";
+import { GenericEntity } from "./generic.entity";
 import { EnumStatusUsuario } from "./enums/statusUsuario.enum";
 import { EnumGenero } from "./enums/genero.enum";
 
