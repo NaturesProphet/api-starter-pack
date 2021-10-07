@@ -10,6 +10,6 @@ import { WebSocketService } from "./websocket.service";
 @Module( {
   imports: [],
   providers: [ WebSocketService, ...WebSocketProviders ],
-  exports: [ WebSocketService ]
+  exports: [ WebSocketService, ...WebSocketProviders ]
 } )
 export class WebSocketModule { }
