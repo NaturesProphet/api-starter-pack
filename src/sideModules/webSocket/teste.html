@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Socket.io Example</title>
+</head>
+
+<body>
+  <h1>Our Socket.io Test Application</h1>
+  <div>
+    <h2>Messages</h2>
+    <ul></ul>
+  </div>
+  <form action="asd()">
+    <input type="text" />
+    <button>Send</button>
+  </form>
+  <script src="../../../node_modules/socket.io/client-dist/socket.io.js"></script>
+  <script>
+    const socket = io( "http://localhost:20121" );
+    socket.on( 'evento', ( dados ) => {
+      console.log( dados )
+    } )
+  </script>
+</body>
+
+</html>

@@ -5,9 +5,10 @@ import { DBExceptionFilter } from './shared/filters/db-exception.filter';
 import { FallbackExceptionFilter } from './shared/filters/fallback-exception.filter';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { AppLoggerMiddleware } from './shared/Logger/middleware';
+import { WebSocketModule } from './sideModules/webSocket/websocket.module';
 
 @Module( {
-  imports: [ typeORMConnection ],
+  imports: [ typeORMConnection, WebSocketModule ],
   providers: [
     {
       provide: APP_FILTER,
