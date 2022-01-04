@@ -11,7 +11,7 @@ export const typeORMConnection = TypeOrmModule.forRoot( {
   database: dbSchema,
   entities: [ __dirname + '/../**/entities/*.entity{.ts,.js}' ],
   keepConnectionAlive: false,
-  synchronize: true,
+  synchronize: false,
   logging: process.env.NODE_ENV === 'test' || 'test:dev' ? false : true,
   extra: {
     connectionLimit: 50

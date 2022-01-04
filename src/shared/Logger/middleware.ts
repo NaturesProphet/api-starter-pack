@@ -8,10 +8,7 @@ export class AppLoggerMiddleware implements NestMiddleware {
   private logger = new Logger( 'HTTP' );
 
   use ( request: Request, response: Response, next: NextFunction ): void {
-    let separate = '\n--------------------------------------';
-    if ( +process.env.LOG_LEVEL == 5 ) {
-      separate = '';
-    }
+    const separate = '\n--------------------------------------';
 
     const { ip, method, baseUrl } = request;
     const userAgent = request.get( 'user-agent' ) || '';
@@ -22,18 +19,35 @@ export class AppLoggerMiddleware implements NestMiddleware {
     } else {
       request.on( 'close', () => {
         const { statusCode } = response;
+        let msg: string;
+
+        if ( Object.values( request.body ).length != 0 ) {
+          msg = `${method} ${baseUrl} ${statusCode} - ${userAgent}\n\n`;
+        }
+        else {
+          msg = `${method} ${baseUrl} ${statusCode} - ${userAgent}\n${separate}\n`;
+        }
 
         if ( statusCode <= 304 ) {
-          this.logger.verbose(
-            `${method} ${baseUrl} ${statusCode} - ${userAgent} ${ip}${separate}`
-          );
-        } else {
-          this.logger.error(
-            `${method} ${baseUrl} ${statusCode} - ${userAgent} ${ip}${separate}`
-          );
+          this.logger.verbose( msg );
         }
-        this.logger.debug( `Body: ${JSON.stringify( request.body )}`
-          + `\n--------------------------------------` )
+        else {
+          this.logger.error( msg );
+        }
+        if ( Object.values( request.body ).length != 0 ) {
+          const body = { ...request.body };
+
+          if ( request.body.password ) {
+            body.password = "***";
+          }
+          if ( request.body.senha ) {
+            body.senha = "***";
+          }
+
+          else {
+            this.logger.debug( `Body: ${JSON.stringify( body )}\n${separate}\n` );
+          }
+        }
       } );
       next();
     }
