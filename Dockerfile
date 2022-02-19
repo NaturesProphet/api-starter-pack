@@ -1,4 +1,4 @@
-FROM node:14.17.0-alpine
+FROM node:14.19.0-alpine
 
 RUN mkdir -p /usr/app/src
 WORKDIR /usr/app
@@ -10,6 +10,5 @@ RUN npm run build
 RUN rm -R node_modules
 RUN npm install --prod
 RUN rm -R src
-RUN ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
 CMD ["npm","run","start:prod"]
